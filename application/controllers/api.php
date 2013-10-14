@@ -16,8 +16,69 @@
 // This can be removed if you use __autoload() in config.php OR use Modular Extensions
 require APPPATH.'/libraries/REST_Controller.php';
 
-class Ultimate_bucket_list extends REST_Controller
+class Api extends REST_Controller
 {
+
+    public $default_list = array(
+        "On the Field Greatness" => array(
+            "Catch a Callahan (preferably with an egregious layout)",
+            "Bookends – get the D and the score",
+            "Sky someone taller than you",
+            "Complete a huge hammer",
+            "Stall someone out",
+            "Complete a 'Worlds Greatest'",
+            "Throw a full field huck for a score",
+            "Spike the disc after a contentious play",
+            "Catch a Layout D",
+            "Catch/Throw a winning score on double game point"
+        ),
+        "Team Domination" => array(
+            "Upset a team who is supposed to be better than you",
+            "Win a tournament",
+            "Oatbag a team (A 6-0 run)",
+            "Play in a game to go to (either regionals or nationals depending on level of play)"
+        ),
+        "Destinations" => array(
+            "Play in a Hat Tournament",
+            "Play in another country",
+            "Play in an observed game",
+            "Go to College Championships",
+            "Go to Club Championships",
+            "Play in a beach tournament"
+        ),
+        "Socializing and Arguing" => array(
+            "Drink a disc full of beer",
+            "Win a party",
+            "Master all disc related drinking games",
+            "Argue a call until the opponent relents",
+            "Heckle so acutely the player responds to you personally"
+        ),
+        "The 'Kwame Brown' experience of Ultimate" => array(
+            "Get spiked on",
+            "Drop a pull",
+            "Get skied by someone shorter than you",
+            "Mess up the force",
+            "Injure yourself stupidly",
+            "Make a call so bad, you are embarrassed and recant it immediately"
+        ),
+        "The Devil Wears Patagonia" => array(
+            "Wear a sublimated jersey",
+            "Buy unnecessary clothing at a tournament",
+            "Wear Patagonia shorts",
+            "Trade your jersey"
+        )
+    );
+
+    function default_get()
+    {
+        $this->response($this->default_list, HTTP_STATUS_OK);
+    }
+
+    function index_get()
+    {
+        $this->response($this->List_model->get_by_user($this->User_model->email), HTTP_STATUS_OK);
+    }
+
 	function user_get()
     {
         if(!$this->get('id'))

@@ -50,6 +50,24 @@ class CI_Model {
 		$CI =& get_instance();
 		return $CI->$key;
 	}
+
+	/**
+	 * get_user_key
+	 *
+	 * Getting data based on the user can be done using the id field or the email field
+	 *
+	 * @param	string
+	 * @access public
+	 */
+	function get_key($id)
+	{
+		$key = 'id';
+        // Unless the id is a string, then we assume the key is the email address
+        if (!is_numeric($id)) {
+            $key = 'email';
+        }
+        return $key;
+	}
 }
 // END Model Class
 
